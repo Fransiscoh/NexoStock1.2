@@ -1,0 +1,57 @@
+{
+    "version": 2,
+    "functions": {
+        "backend/**/*.php": {
+            "runtime": "vercel-php@0.6.0"
+        },
+        "frontend/**/*.php": {
+            "runtime": "vercel-php@0.6.0"
+        }
+    },
+    "routes": [
+        {
+            "src": "/assets/(.*)",
+            "dest": "/frontend/assets/$1"
+        },
+        {
+            "src": "/NexoStock.jpg",
+            "dest": "/NexoStock.jpg"
+        },
+        {
+            "src": "/backend/login.php",
+            "dest": "/backend/login.php"
+        },
+        {
+            "src": "/backend/logout.php",
+            "dest": "/backend/logout.php"
+        },
+        {
+            "src": "/backend/register.php",
+            "dest": "/backend/register.php"
+        },
+        {
+            "src": "/backend/google_callback.php",
+            "dest": "/backend/google_callback.php"
+        },
+        {
+            "src": "/backend/forgot-password.php",
+            "dest": "/backend/forgot-password.php"
+        },
+        {
+            "src": "/backend/reset-password.php",
+            "dest": "/backend/reset-password.php"
+        },
+        {
+            "src": "/backend/verification.php",
+            "dest": "/backend/verification.php"
+        },
+        {
+            "src": "/api/(.*)",
+            "dest": "/backend/index.php?accion=$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/frontend/$1"
+        }
+    ]
+}

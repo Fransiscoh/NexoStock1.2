@@ -1,0 +1,340 @@
+/* Admin Panel Specific Styles */
+
+/* General layout adjustments for admin content */
+.admin-content {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card-header-left {
+    margin-bottom: 20px;
+}
+
+.card-header-right {
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    /* margin-top: 20px; */
+}
+
+.table-container table th, .table-container table td {
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: left;
+}
+
+.table-container table th {
+    background-color: var(--header-background);
+    color: var(--header-text-color);
+    font-weight: bold;
+}
+
+.table-container table tr:nth-child(even) {
+    background-color: var(--table-row-even-background);
+}
+
+.table-container table tr:hover {
+    background-color: var(--table-row-hover-background);
+}
+
+.actions-cell button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.actions-cell .edit-btn {
+    background-color: #ffc107;
+    color: white;
+}
+
+.actions-cell .delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+/* Role select dropdown */
+.role-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.role-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+/* Adjustments for tabs in admin panel */
+.admin-content .tabs-nav {
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.admin-content .tab-nav-btn {
+    padding: 10px 15px;
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.admin-content .tab-nav-btn.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.admin-content .tab-nav-btn:hover:not(.active) {
+    color: var(--primary-color-light);
+}
+
+.admin-content .tab-pane {
+    display: none;
+}
+
+.admin-content .tab-pane.active {
+    display: block;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.5);
+    padding: 20px;
+}
+
+.modal.is-open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--surface-color);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 20px;
+    flex-shrink: 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.close-btn {
+    color: var(--text-color);
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.modal-body {
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-body .form-group {
+    margin-bottom: 15px;
+}
+
+.modal-body label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-body input,
+.modal-body select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid var(--border-color);
+    padding: 15px 20px;
+    flex-shrink: 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Utility classes */
+.mt-4 {
+    margin-top: 40px;
+}
+
+.mt-2 {
+    margin-top: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+}
+
+/* Wider modal for forms */
+#productModal .modal-content,
+#supplierModal .modal-content {
+    max-width: 700px;
+}
+
+/* Apply a 2-column grid only to the product form, as it has many fields */
+#productForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px; /* 0 gap for rows, 20px for columns */
+}
+
+/* Stock adjustment controls */
+.stock-adjustment-cell {
+    display: flex;
+    align-items: center;
+}
+
+.stock-adjustment-cell input {
+    width: 70px;
+    text-align: center;
+    margin: 0 10px;
+    padding: 8px;
+}
+
+.stock-adjustment-cell button {
+    width: 35px;
+    height: 35px;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-background);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Force icon color to be white inside primary buttons for contrast */
+.btn-primary .fas {
+    color: white;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Notificaciones */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 1001;
+  animation: slideIn 0.3s ease;
+}
+
+.notification.success {
+  background: var(--success-color);
+}
+
+.notification.error {
+  background: var(--error-color);
+}
+
+.notification.warning {
+  background: var(--warning-color);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.sales-filters {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+}

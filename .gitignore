@@ -1,0 +1,19 @@
+# Archivos de configuración y variables de entorno
+# ¡NUNCA subas este archivo a GitHub! Contiene tus contraseñas.
+.env
+
+# Archivos de configuración que pueden contener secretos.
+# Es mejor usar Variables de Entorno en Vercel.
+config.json
+
+# Dependencias de Composer
+/vendor/
+
+# Archivos de logs y del sistema operativo
+*.log
+.DS_Store
+Thumbs.db
+
+# Archivos de IDE
+.idea/
+.vscode/
