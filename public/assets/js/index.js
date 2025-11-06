@@ -1,10 +1,17 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     // Apply saved theme
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.body.setAttribute('data-theme', savedTheme);
     const themeIcon = document.querySelector('.theme-toggle i');
     if (themeIcon) {
         themeIcon.className = savedTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    }
+    
+    updateUserSessionUI();
+    // Aquí puedes llamar a otras funciones que necesiten ejecutarse al inicio,
+    // como fetchData() si es que existe.
+    if (window.fetchData) {
+        window.fetchData();
     }
 
     // Limpiar facturador al iniciar
@@ -42,13 +49,18 @@ const unitConversions = {
 
 window.fetchData = async function(options = { displaySales: true }) {
     try {
-        const response = await fetch('../backend/index.php?accion=bootstrap');
-        const data = await response.json();
+        const bootstrapResponse = await fetch('../backend/index.php?accion=bootstrap');
+        const data = await bootstrapResponse.json();
 
         if (data.error) {
             showNotification(data.error, 'error');
             return;
         }
+        const sessionResponse = await fetch('../backend/api/get_user_session.php');
+        if (!response.ok) {
+            throw new Error('La respuesta de la red no fue correcta.');
+        }
+        const session = await response.json();
 
         products = data.productos || [];
         brands = data.marcas || [];
@@ -56,6 +68,8 @@ window.fetchData = async function(options = { displaySales: true }) {
         providers = data.proveedores || [];
         sales = data.ventas || [];
         userRole = data.user_role || 'usuario';
+        const userNameElement = document.getElementById('user-name');
+        const navElement = document.getElementById('main-nav');
 
         updateDashboard();
         loadProductsTable();
@@ -115,6 +129,8 @@ async function handleAddProduct(e) {
         if (product.error) {
             showNotification(product.error, 'error');
             return;
+        if (userNameElement) {
+            userNameElement.textContent = session.userName;
         }
 
         products.push(product);
@@ -247,8 +263,19 @@ function formatStock(quantity, unit) {
                 // If it's a whole number, no decimals. Otherwise, up to 3 for precision.
                 const maxDecimals = value % 1 === 0 ? 0 : 3;
                 return `${new Intl.NumberFormat('es-ES', { maximumFractionDigits: maxDecimals }).format(value)} kg`;
+            }
+            return `${formatNumber(value * 1000)} g`;
+            if (session.isLoggedIn) {
+                navElement.innerHTML = `
+                    <a href="dashboard.html">Mi Panel</a>
+                    <a href="../backend/logout.php">Cerrar Sesión</a>
+                `;
             } else {
                 return `${formatNumber(value * 1000, 0, 0)} g`;
+                navElement.innerHTML = `
+                    <a href="login.html">Iniciar Sesión</a>
+                    <a href="register.html">Registrarse</a>
+                `;
             }
         case 'l':
             if (value >= 1) {
@@ -489,6 +516,8 @@ async function deleteItem(type, id) {
     } catch (error) {
         showNotification(`Error de conexión al eliminar ${type}.`, 'error');
         console.error(`Error deleting ${type}:`, error);
+        console.error('Error al obtener la sesión del usuario:', error);
+        // Opcional: mostrar un mensaje de error en la UI
     }
 }
 
@@ -908,6 +937,7 @@ async function createMix() {
         const result = await response.json();
         if (result.error) {
             showNotification(result.error, 'error');
+...
             return;
         }
 
